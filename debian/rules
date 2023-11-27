@@ -1,4 +1,20 @@
 #!/usr/bin/make -f
 
+include /usr/share/dpkg/architecture.mk
+
+ifeq (,$(findstring terse,$(DEB_BUILD_OPTIONS)))
+        VERBOSE=1
+endif
+
+export CROSS_COMPILE=$(DEB_HOST_GNU_TYPE)-
+PREFIX=/usr
+build_flags = prefix=$(PREFIX) libdir_relative=lib/$(DEB_HOST_MULTIARCH) pkgconfig_dir=$(PREFIX)/lib/$(DEB_HOST_MULTIARCH)/pkgconfig V=$(VERBOSE)
+
 %:
-	dh $@
+	dh $@ --no-parallel
+
+override_dh_auto_build:
+	dh_auto_build -- all doc $(build_flags)
+
+override_dh_auto_install:
+	dh_auto_install -- doc-install $(build_flags)

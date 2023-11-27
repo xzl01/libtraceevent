@@ -1,5 +1,143 @@
-template-repository (1.0-1) unstable; urgency=medium
+libtraceevent (1:1.7.3-1) unstable; urgency=medium
 
-  * Initial release
+  [ Sudip Mukherjee ]
+  * New upstream version 1.7.3
+    - Update copyright.
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+  [ Lucas Kanashiro ]
+  * Run upstream make test in dh_auto_test
+    - d/control: add b-d on libcunit1-dev.
+    - d/rules: remove override_dh_auto_test with nothing in it.
+  * d/tests: add DEP-8 test to build samples
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Tue, 20 Jun 2023 21:36:27 +0100
+
+libtraceevent (1:1.7.1-1) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Repository.
+  * Apply multi-arch hints.
+
+  [ Sudip Mukherjee ]
+  * New upstream version 1.7.1
+  * Update Standards-Version to 4.6.2
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Wed, 18 Jan 2023 21:54:01 +0000
+
+libtraceevent (1:1.7.0-1) unstable; urgency=medium
+
+  * New upstream version 1.7.0
+    - Update symbols.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sun, 25 Dec 2022 00:37:01 +0000
+
+libtraceevent (1:1.6.3-1) unstable; urgency=medium
+
+  * New upstream version 1.6.3
+    - Update copyright.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sat, 24 Sep 2022 21:57:02 +0100
+
+libtraceevent (1:1.6.2-1) unstable; urgency=medium
+
+  * New upstream version 1.6.2
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Thu, 11 Aug 2022 16:25:03 +0100
+
+libtraceevent (1:1.6.1-1) unstable; urgency=medium
+
+  * New upstream version 1.6.1
+  * Update Standards-Version to 4.6.1.0
+  * Update copyright.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Tue, 28 Jun 2022 21:33:23 +0100
+
+libtraceevent (1:1.6.0-1) unstable; urgency=medium
+
+  * New upstream version 1.6.0
+    - Update symbols.
+    - Update copyright.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sun, 05 Jun 2022 21:45:30 +0100
+
+libtraceevent (1:1.5.3-1) unstable; urgency=medium
+
+  * New upstream version 1.5.3
+  * Disable parallel builds. (Closes: #1009042)
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Fri, 22 Apr 2022 11:33:06 +0100
+
+libtraceevent (1:1.5.1-1) unstable; urgency=medium
+
+  * New upstream version 1.5.1
+    - Update symbols file.
+    - Update copyright.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sun, 27 Feb 2022 00:35:26 +0000
+
+libtraceevent (1:1.3.3-1) unstable; urgency=medium
+
+  * Upload to unstable.
+  * New upstream version 1.3.3
+    - Update symbols.
+  * Update Standards-Version to 4.6.0
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sat, 28 Aug 2021 23:44:25 +0100
+
+libtraceevent (1:1.3.0-1) experimental; urgency=medium
+
+  * New upstream version 1.3.0
+    - Update symbols.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sun, 23 May 2021 16:59:07 +0100
+
+libtraceevent (1:1.2.1-1) experimental; urgency=medium
+
+  * New upstream version 1.2.1
+    - Update symbols.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sat, 24 Apr 2021 00:28:15 +0100
+
+libtraceevent (1:1.1.3-1) experimental; urgency=medium
+
+  * New upstream version 1.1.3
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Fri, 02 Apr 2021 22:58:49 +0100
+
+libtraceevent (1:1.1.2-1) unstable; urgency=medium
+
+  * New upstream version 1.1.2
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Mon, 15 Feb 2021 20:07:08 +0000
+
+libtraceevent (1:1.1.1-2) unstable; urgency=medium
+
+  * Fix FTCBFS: Export CROSS_COMPILE. (Closes: #973840)
+    - Thanks to Helmut Grohne.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sun, 24 Jan 2021 22:04:21 +0000
+
+libtraceevent (1:1.1.1-1) unstable; urgency=medium
+
+  * New upstream version 1.1.1
+    - Update copyright.
+    - Removed patches applied upstream.
+    - Update symbols.
+    - Ignore tests depending on DESTDIR.
+  * Enable verbose builds unless 'terse' DEB_BUILD_OPTIONS is set.
+  * Update Standards-Version to 4.5.1
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Fri, 15 Jan 2021 21:05:31 +0000
+
+libtraceevent (1:1.1.0-2) unstable; urgency=medium
+
+  * Source only upload.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sun, 01 Nov 2020 17:52:58 +0000
+
+libtraceevent (1:1.1.0-1) unstable; urgency=medium
+
+  * Create new libtraceevent package from upstream repo. (Closes: #971976)
+    - libtraceevent package to be removed from kernel builds.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Fri, 30 Oct 2020 12:52:36 +0000

@@ -1,0 +1,4 @@
+version=4
+
+opts="mode=git" https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git \
+   refs/tags/libtraceevent-([\d\.]+) debian uupdate
