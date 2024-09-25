@@ -4,9 +4,9 @@
 
 project(
     'libtraceevent', ['c'],
-    meson_version: '>= 0.50.0',
+    meson_version: '>= 0.58.0',
     license: 'LGPL-2.1',
-    version: '1.7.3',
+    version: '1.8.3',
     default_options: [
         'c_std=gnu99',
         'buildtype=debug',
@@ -25,7 +25,7 @@ htmldir = join_paths(prefixdir, get_option('htmldir'))
 libdir = join_paths(prefixdir, get_option('libdir'))
 plugindir = get_option('plugindir')
 if plugindir == ''
-    plugindir = join_paths(libdir, 'libtraceevent/plugins')
+    plugindir = join_paths(libdir, 'traceevent/plugins')
 endif
 
 add_project_arguments(
@@ -45,6 +45,8 @@ if cunit_dep.found()
     subdir('utest')
 endif
 subdir('samples')
+
+if get_option('doc')
 subdir('Documentation')
 
 custom_target(
@@ -52,3 +54,4 @@ custom_target(
     output: 'docs',
     depends: [html, man],
     command: ['echo'])
+endif

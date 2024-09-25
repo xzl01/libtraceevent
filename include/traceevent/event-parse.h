@@ -554,6 +554,8 @@ struct tep_cmdline *tep_data_pid_from_comm(struct tep_handle *tep, const char *c
 					   struct tep_cmdline *next);
 int tep_cmdline_pid(struct tep_handle *tep, struct tep_cmdline *cmdline);
 
+bool tep_record_is_event(struct tep_record *record, struct tep_event *event);
+
 void tep_print_field_content(struct trace_seq *s, void *data, int size,
 			     struct tep_format_field *field);
 void tep_record_print_fields(struct trace_seq *s,
@@ -586,6 +588,8 @@ int tep_get_long_size(struct tep_handle *tep);
 void tep_set_long_size(struct tep_handle *tep, int long_size);
 int tep_get_page_size(struct tep_handle *tep);
 int tep_get_sub_buffer_size(struct tep_handle *tep);
+int tep_get_sub_buffer_data_size(struct tep_handle *tep);
+int tep_get_sub_buffer_commit_offset(struct tep_handle *tep);
 void tep_set_page_size(struct tep_handle *tep, int _page_size);
 bool tep_is_file_bigendian(struct tep_handle *tep);
 void tep_set_file_bigendian(struct tep_handle *tep, enum tep_endian endian);

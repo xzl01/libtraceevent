@@ -12,6 +12,7 @@ libtraceevent.so.1 libtraceevent1 #MINVER#
  kbuffer_curr_index@Base 5.4
  kbuffer_curr_offset@Base 5.4
  kbuffer_curr_size@Base 5.4
+ kbuffer_dup@Base 1:1.8.1
  kbuffer_event_size@Base 5.4
  kbuffer_free@Base 5.4
  kbuffer_load_subbuffer@Base 5.4
@@ -20,10 +21,13 @@ libtraceevent.so.1 libtraceevent1 #MINVER#
  kbuffer_ptr_delta@Base 5.8
  kbuffer_raw_get@Base 5.4
  kbuffer_read_at_offset@Base 5.4
+ kbuffer_read_buffer@Base 1:1.8.1
  kbuffer_read_event@Base 5.4
+ kbuffer_refresh@Base 1:1.8.1
  kbuffer_set_old_format@Base 5.4
  kbuffer_start_of_data@Base 5.4
  kbuffer_subbuf_timestamp@Base 5.8
+ kbuffer_subbuffer@Base 1:1.8.1
  kbuffer_subbuffer_size@Base 5.4
  kbuffer_timestamp@Base 5.4
  kbuffer_translate_data@Base 5.4
@@ -85,6 +89,8 @@ libtraceevent.so.1 libtraceevent1 #MINVER#
  tep_get_long_size@Base 5.4
  tep_get_page_size@Base 5.4
  tep_get_ref@Base 5.4
+ tep_get_sub_buffer_commit_offset@Base 1:1.8.1
+ tep_get_sub_buffer_data_size@Base 1:1.8.1
  tep_get_sub_buffer_size@Base 1:1.5.1
  tep_info@Base 1:1.3.0
  tep_is_file_bigendian@Base 5.4
@@ -122,6 +128,7 @@ libtraceevent.so.1 libtraceevent1 #MINVER#
  tep_read_number@Base 5.4
  tep_read_number_field@Base 5.4
 #MISSING: 1:1.1.1-1# tep_read_token@Base 5.4
+ tep_record_is_event@Base 1:1.8.1
  tep_record_print_fields@Base 1:1.5.1
  tep_record_print_selected_fields@Base 1:1.5.1
  tep_ref@Base 5.4

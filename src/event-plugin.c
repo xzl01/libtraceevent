@@ -327,7 +327,7 @@ int tep_plugin_add_option(const char *name, const char *val)
 		return -ENOMEM;
 
 	if (parse_option_name(&option_str, &plugin) < 0)
-		return -ENOMEM;
+		goto out_free;
 
 	/* If the option exists, update the val */
 	for (op = trace_plugin_options; op; op = op->next) {
@@ -474,7 +474,7 @@ load_plugin(struct tep_handle *tep, const char *path,
 		while (options->name) {
 			ret = update_option(alias, options);
 			if (ret < 0)
-				goto out_free;
+				goto out_close;
 			options++;
 		}
 	}
@@ -483,13 +483,13 @@ load_plugin(struct tep_handle *tep, const char *path,
 	if (!func) {
 		tep_warning("could not find func '%s' in plugin '%s'\n%s\n",
 			    TEP_PLUGIN_LOADER_NAME, plugin, dlerror());
-		goto out_free;
+		goto out_close;
 	}
 
 	list = malloc(sizeof(*list));
 	if (!list) {
 		tep_warning("could not allocate plugin memory\n");
-		goto out_free;
+		goto out_close;
 	}
 
 	list->next = *plugin_list;
@@ -501,6 +501,8 @@ load_plugin(struct tep_handle *tep, const char *path,
 	func(tep);
 	return;
 
+out_close:
+	dlclose(handle);
  out_free:
 	free(plugin);
 }

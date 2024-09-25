@@ -1,3 +1,25 @@
+libtraceevent (1:1.8.3-1) unstable; urgency=medium
+
+  * New upstream version 1.8.3
+  * Update Standards-Version to 4.7.0
+  * Depends on pkgconf instead of pkg-config
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sun, 28 Jul 2024 20:44:57 +0100
+
+libtraceevent (1:1.8.2-1) unstable; urgency=medium
+
+  * New upstream version 1.8.2
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sun, 14 Jan 2024 22:08:15 +0000
+
+libtraceevent (1:1.8.1-1) unstable; urgency=medium
+
+  * New upstream version 1.8.1
+    - Update symbols.
+  * Add lintian override.
+
+ -- Sudip Mukherjee <sudipm.mukherjee@gmail.com>  Sun, 07 Jan 2024 22:36:44 +0000
+
 libtraceevent (1:1.7.3-1) unstable; urgency=medium
 
   [ Sudip Mukherjee ]

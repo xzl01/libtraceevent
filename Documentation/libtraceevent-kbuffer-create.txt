@@ -3,7 +3,8 @@ libtraceevent(3)
 
 NAME
 ----
-kbuffer_alloc, kbuffer_free, kbuffer_load_subbuffer, kbuffer_subbuffer_size, kbuffer_start_of_data - Creating of kbuffer element to parse
+kbuffer_alloc, kbuffer_dup, kbuffer_free, kbuffer_load_subbuffer, kbuffer_subbuffer,
+kbuffer_refresh, kbuffer_subbuffer_size, kbuffer_start_of_data - Creating of kbuffer element to parse
 the Linux kernel tracing ring buffer
 
 SYNOPSIS
@@ -28,10 +29,13 @@ struct kbuffer;
 struct tep_handle;
 
 struct kbuffer pass:[*]*kbuffer_alloc*(enum kbuffer_long_size _size_, enum kbuffer_endian _endian_);
+struct kbuffer pass:[*]*kbuffer_dup*(struct kbuffer pass:[*]_kbuf_);
 void *kbuffer_free*(struct kbuffer pass:[*]_kbuf_);
 int *kbuffer_load_subbuffer*(struct kbuffer pass:[*]_kbuf_, void pass:[*]_subbuffer_);
-int *kbuffer_subbuffer_size*(struct kbuffer pass:[*]_kbuf);
+int *kbuffer_subbuffer_size*(struct kbuffer pass:[*]_kbuf_);
+int *kbuffer_refresh*(struct kbuffer pass:[*]_kbuf_);
 int *kbuffer_start_of_data*(struct kbuffer pass:[*]_kbuf_);
+void pass:[*]*kbuffer_subbuffer*(struct kbuffer pass:[*]_kbuf);
 --
 
 DESCRIPTION
@@ -59,6 +63,11 @@ will then perform a *uname(2)* call, and if the _machine_ field has the string "
 in it, it will be set to 8 byte long size and not 4 byte. This is because the
 ring buffer long size is dependent on the kernel and not user space.
 
+The *kbuffer_dup()* function will duplicate an existing kbuffer structure with
+an allocated new one. It will have all the properties of the passed in _kbuf_,
+including pointing to the same subbuffer that was loaded in the _kbuf_.
+It must be freed with *kbuffer_free()*.
+
 The *kbuffer_free()* function will free the resources created by *kbuffer_alloc()*.
 
 The *kbuffer_load_subbuffer()* will take a _subbuffer_ which is a raw data blob
@@ -70,8 +79,19 @@ is what kbuffer uses to walk the events.
 The *kbuffer_subbuffer_size()* returns the location of the end of the last event
 on the sub-buffer. It does not return the size of the sub-buffer itself.
 
+The *kbuffer_refresh()* is to be used if more writes were done on the loaded kbuffer
+where the size of the kbuffer needs to be refreshed to be able to read the new
+events that were written since the last *kbuffer_load_subbuffer()* was called on it.
+
+Note, no memory barriers are implemented with this function and any synchronization
+with the writer is the responsibility of the application.
+
 The *kbuffer_start_of_data()* function returns the offset of where the actual
 data load of the sub-buffer begins.
+
+The *kbuffer_subbuffer()* function returns the pointer to the currently loaded
+subbuffer. That is, the last subbuffer that was loaded by *kbuffer_load_subbuffer()*.
+If no subbuffer was loaded NULL is returned.
 
 RETURN VALUE
 ------------
@@ -85,6 +105,12 @@ of the last event is located.
 
 *kbuffer_start_of_data()* returns the offset of where the data begins on the
 sub-buffer loaded in _kbuf_.
+
+*kbuffer_subbuffer()* returns the last loaded subbuffer to _kbuf_ that was loaded
+by *kbuffer_load_subbuffer()* or NULL if none was loaded.
+
+*kbuffer_refresh()* returns 0 on success and -1 if _kbuf_ is NULL or it does not
+have a subbuffer loaded via *kbuffer_load_subbuffer()*.
 
 EXAMPLE
 -------

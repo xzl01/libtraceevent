@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0
 # libtraceevent version
 EP_VERSION = 1
-EP_PATCHLEVEL = 7
+EP_PATCHLEVEL = 8
 EP_EXTRAVERSION = 3
 EVENT_PARSE_VERSION = $(EP_VERSION).$(EP_PATCHLEVEL).$(EP_EXTRAVERSION)
 
@@ -352,7 +352,7 @@ install_headers:
 
 install: install_libs
 
-clean: clean_plugins clean_src
+clean: clean_plugins clean_src clean_meson
 	$(Q)$(call do_clean,\
 	    $(VERSION_FILE) $(obj)/tags $(obj)/TAGS $(PKG_CONFIG_FILE) \
 	    $(LIBTRACEEVENT_STATIC) $(LIBTRACEEVENT_SHARED) \
@@ -435,6 +435,19 @@ clean_plugins:
 PHONY += clean_src
 clean_src:
 	$(Q)$(call descend_clean,src)
+
+meson:
+	$(MAKE) -f Makefile.meson
+
+meson_install:
+	$(MAKE) -f Makefile.meson install
+
+meson_docs:
+	$(MAKE) -f Makefile.meson docs
+
+PHONY += clean_meson
+clean_meson:
+	$(Q)$(MAKE) -f Makefile.meson $@
 
 force:
 

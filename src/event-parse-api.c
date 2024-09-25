@@ -263,6 +263,20 @@ void tep_set_page_size(struct tep_handle *tep, int _page_size)
 }
 
 /**
+ * tep_get_sub_buffer_data_size - get the size of the data portion
+ * @tep: The handle to the tep to get the data size from
+ *
+ * Returns the size of the data portion of the sub buffer
+ */
+int tep_get_sub_buffer_data_size(struct tep_handle *tep)
+{
+	if (!tep)
+		return -1;
+
+	return tep->header_page_data_size;
+}
+
+/**
  * tep_get_sub_buffer_size - get the size of a trace buffer page
  * @tep: a handle to the tep_handle
  *
@@ -275,6 +289,21 @@ int tep_get_sub_buffer_size(struct tep_handle *tep)
 		return -1;
 
 	return tep->header_page_data_size + tep->header_page_data_offset;
+}
+
+/**
+ * tep_get_sub_buffer_commit_offset - return offset of the commit location
+ * @tep: the handle to the tep_handle
+ *
+ * Returns the offset of where to find the "commit" field of the offset.
+ * Use tep_get_header_page_size() to find the size of the commit field.
+ */
+int tep_get_sub_buffer_commit_offset(struct tep_handle *tep)
+{
+	if (!tep)
+		return -1;
+
+	return tep->header_page_size_offset;
 }
 
 /**

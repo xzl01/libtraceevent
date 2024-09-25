@@ -27,11 +27,13 @@ Management of tep handler data structure and access of its members:
 	int *tep_get_page_size*(struct tep_handle pass:[*]_tep_);
 	void *tep_set_page_size*(struct tep_handle pass:[*]_tep_, int _page_size_);
 	int *tep_get_sub_buffer_size*(struct tep_handle pass:[*]_tep_);
+	int *tep_get_sub_buffer_data_size*(struct tep_handle pass:[*]_tep_);
+	int *tep_get_sub_buffer_commit_offset*(struct tep_handle pass:[*]_tep_);
 	int *tep_get_header_page_size*(struct tep_handle pass:[*]_tep_);
 	int *tep_get_header_timestamp_size*(struct tep_handle pass:[*]_tep_);
 	bool *tep_is_old_format*(struct tep_handle pass:[*]_tep_);
 	int *tep_strerror*(struct tep_handle pass:[*]_tep_, enum tep_errno _errnum_, char pass:[*]_buf_, size_t _buflen_);
-	struct kbuffer pass:[*]*tep_kbuffer*(struct tep_handle pass:[*]:_tep_);
+	struct kbuffer pass:[*]*tep_kbuffer*(struct tep_handle pass:[*]_tep_);
 
 Register / unregister APIs:
 	int *tep_register_function*(struct tep_handle pass:[*]_tep_, char pass:[*]_name_, unsigned long long _addr_, char pass:[*]_mod_);
@@ -83,6 +85,7 @@ Event finding:
 	struct tep_event pass:[*]*tep_find_event*(struct tep_handle pass:[*]_tep_, int _id_);
 	struct tep_event pass:[*]*tep_find_event_by_name*(struct tep_handle pass:[*]_tep_, const char pass:[*]_sys_, const char pass:[*]_name_);
 	struct tep_event pass:[*]*tep_find_event_by_record*(struct tep_handle pass:[*]_tep_, struct tep_record pass:[*]_record_);
+	bool *tep_record_is_event*(struct tep_record pass:[*]record, struct tep_event pass:[*]event);
 
 Parsing of event files:
 	int *tep_parse_header_page*(struct tep_handle pass:[*]_tep_, char pass:[*]_buf_, unsigned long _size_, int _long_size_);
@@ -179,9 +182,12 @@ Trace sequences:
 kbuffer parsing:
 #include <kbuffer.h>
 	struct kbuffer pass:[*]*kbuffer_alloc*(enum kbuffer_long_size _size_, enum kbuffer_endian _endian_);
+	struct kbuffer pass:[*]*kbuffer_dup*(struct kbuffer pass:[*]_kbuf_);
 	void *kbuffer_free*(struct kbuffer pass:[*]_kbuf_);
 	int *kbuffer_load_subbuffer*(struct kbuffer pass:[*]_kbuf_, void pass:[*]_subbuffer_);
 	int *kbuffer_subbuffer_size*(struct kbuffer pass:[*]_kbuf);
+	void pass:[*]*kbuffer_subbuffer*(struct kbuffer pass:[*]_kbuf);
+	int *kbuffer_refresh*(struct kbuffer pass:[*]_kbuf_);
 	int *kbuffer_start_of_data*(struct kbuffer pass:[*]_kbuf_);
 	unsigned long long *kbuffer_timestamp*(struct kbuffer pass:[*]_kbuf_);
 	unsigned long long *kbuffer_subbuf_timestamp*(struct kbuffer pass:[*]_kbuf_, void pass:[*]_subbuf_);
@@ -193,6 +199,7 @@ kbuffer parsing:
 	int *kbuffer_curr_size*(struct kbuffer pass:[*]_kbuf_);
 	int *kbuffer_curr_offset*(struct kbuffer pass:[*]_kbuf_);
 	int *kbuffer_curr_index*(struct kbuffer pass:[*]_kbuf_);
+	int *kbuffer_read_buffer*(struct kbuffer pass:[*]_kbuf_, void pass:[*]_buffer_, int _start_, int _len_);
 --
 
 DESCRIPTION
